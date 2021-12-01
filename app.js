@@ -52,14 +52,25 @@ function addTask(event){
     link.setAttribute("href", "#")
     // add link to li
     li.appendChild(link)
-
-
     // add li to tasklist
     tasklist.appendChild(li)
+
+    // save task to local storage
+    taskStorage(task)
 
     //clear form input value
     document.querySelector("#task").value = " "
     event.preventDefault()
+}
+function taskStorage(task){
+    let tasks
+    if(localStorage.getItem("tasks")=== null){
+        tasks = []
+    } else {
+        tasks = JSON.parse(localStorage.getItem("tasks"))
+    }
+    tasks.push(task)
+    localStorage.setItem("tasks", JSON.stringify(tasks))
 }
 
 //console´i: document.querySelector("ul") leiab ul´i dokumendist
